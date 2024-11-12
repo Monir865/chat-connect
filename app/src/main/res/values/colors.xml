@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Splash Screen gradient colors-->
+    <color name="splash_screen_gradient_start">#FCE4EC</color>
+    <color name="splash_screen_gradient_end">#E0F7FA</color>
+
+    <!--Basic App colors-->
+    <color name="colorPrimary">#FF000000</color>
+    <color name="colorPrimaryDark">#FFFFFFFF</color>
+    <color name="colorAccent">#FF000000</color>
+
+    <color name="gradient_start_color">#4c84ff</color>
+    <color name="gradient_end_color">#18a3fe</color>
+
+    <!--Tab item colors-->
+    <color name="tab_indicator_gray">#c0c0c0</color>
+    <color name="intro_title_color">#000000</color>
+    <color name="intro_description_color">#656565</color>
+
+</resources>
