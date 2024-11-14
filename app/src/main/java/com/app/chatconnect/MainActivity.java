@@ -1,5 +1,8 @@
 package com.app.chatconnect;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,8 +14,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.app.chatconnect.activities.Registration;
 import com.app.chatconnect.adapters.ViewPagerScreenContainerAdapter;
-import com.app.chatconnect.model.ScreenContainerModel;
+import com.app.chatconnect.models.ScreenContainerModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +24,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager MainViewPager;
-   // private TabLayout MainTabLayout;
-    private AppCompatButton MainNextScreenBtn;
+    //private com.google.android.material.tabs.TabLayout MainTabLayout;
+    private AppCompatButton MainNextScreenBtn, MainGetStartBtn;
 
 
     @Override
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         MainViewPager = findViewById(R.id.main_view_pager);
         //MainTabLayout = findViewById(R.id.main_tab_layout);
         MainNextScreenBtn = findViewById(R.id.main_next_screen_btn);
+        MainGetStartBtn = findViewById(R.id.main_get_start_btn);
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -43,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         });
         //
 
+        //checkAndUpdateSharedPrefData();
+        SharedPreferences preferences = getSharedPreferences("getStartComplete", MODE_PRIVATE);
+        boolean isEndStartPage = preferences.getBoolean("getStartComplete", false);
+        if(isEndStartPage)
+            startActivity(new Intent(MainActivity.this, Registration.class));
+
         List<ScreenContainerModel> screenList = new ArrayList<ScreenContainerModel>();
         screenList.add(new ScreenContainerModel(R.drawable.ic_connection_icon,"Seamless Chat Connection","Connect with friends and colleagues instantly through our reliable chat platform. Start conversations, share moments, and stay connected with ease, no matter where you are."));
         screenList.add(new ScreenContainerModel(R.drawable.ic_group_icon,"Collaborate in Groups","Bring people together in groups to discuss ideas, share updates, and collaborate efficiently. Create or join groups to stay organized and connected with everyone that matters."));
@@ -50,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPagerScreenContainerAdapter adapter = new ViewPagerScreenContainerAdapter(this, screenList);
         MainViewPager.setAdapter(adapter);
-
 
         MainNextScreenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,15 +72,73 @@ public class MainActivity extends AppCompatActivity {
                     MainViewPager.setCurrentItem(++currentItem, true);
                 }
 
+                loadGetStartPage(MainViewPager, screenList);
+
+
+            }
+        });
+
+        MainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                loadGetStartPage(MainViewPager, screenList);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        //
+        //MainTabLayout.setupWithViewPager(MainViewPager);
+
+        MainGetStartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAndUpdateSharedPrefData();
+                startActivity(new Intent(MainActivity.this, Registration.class));
             }
         });
 
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        int position = MainViewPager.getCurrentItem();
 
+        if(position == 0){
+            super.onBackPressed();
+        }else{
+            MainViewPager.setCurrentItem(position-1, true);
+        }
+
+        //super.onBackPressed();
+    }
+
+    private void loadGetStartPage(ViewPager viewPager, List list){
+        if(viewPager.getCurrentItem() == list.size()-1){
+            MainGetStartBtn.setVisibility(View.VISIBLE);
+            MainNextScreenBtn.setVisibility(View.INVISIBLE);
+        }else {
+            MainGetStartBtn.setVisibility(View.INVISIBLE);
+            MainNextScreenBtn.setVisibility(View.VISIBLE);
+        }
     }
 
 
+    private void checkAndUpdateSharedPrefData(){
+        SharedPreferences preferences = getSharedPreferences("getStartComplete" , MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor pref_edit = preferences.edit();
+        pref_edit.putBoolean("getStartComplete", true);
+        pref_edit.apply();
+    }
 
 
 }

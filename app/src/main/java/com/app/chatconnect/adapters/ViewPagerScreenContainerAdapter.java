@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.app.chatconnect.R;
-import com.app.chatconnect.model.ScreenContainerModel;
+import com.app.chatconnect.models.ScreenContainerModel;
 
 import java.util.List;
 

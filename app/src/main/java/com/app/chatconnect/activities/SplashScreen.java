@@ -1,9 +1,8 @@
-package com.app.chatconnect;
+package com.app.chatconnect.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.ActionMode;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -13,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.app.chatconnect.MainActivity;
+import com.app.chatconnect.R;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -39,15 +41,15 @@ public class SplashScreen extends AppCompatActivity {
 
         // Work Logic
         SplashScreenImage.startAnimation(animation);
-        Intent getStartPageIntent = new Intent(this, MainActivity.class);
+
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(getStartPageIntent);
+                startActivity(new Intent(SplashScreen.this, MainActivity.class));
                 finish();
             }
-        }, 4000);
+        }, 2000);
 
 
 

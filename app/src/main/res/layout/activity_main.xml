@@ -16,7 +16,23 @@
         android:layout_marginBottom="60dp"
         android:contentDescription="Swipe through screens for chat features" />
 
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/main_get_start_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Start"
+        android:background="#12AFF4"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_above="@+id/bottom_relative_container"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+
     <RelativeLayout
+        android:id="@+id/bottom_relative_container"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
@@ -26,12 +42,14 @@
 
         <!--
         <com.google.android.material.tabs.TabLayout
+            app:tabBackground="@drawable/indicator_selector"
             android:id="@+id/main_tab_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:tabMode="fixed" />
             -->
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_next_screen_btn"

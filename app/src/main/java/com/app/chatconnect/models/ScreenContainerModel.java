@@ -1,4 +1,4 @@
-package com.app.chatconnect.model;
+package com.app.chatconnect.models;
 
 public class ScreenContainerModel {
     private int image;
