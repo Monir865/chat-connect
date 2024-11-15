@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ChatConnect</string>
+
+    <string name="login_text"><u>Login</u></string>
+    <string name="reg_text"><u>Sign Up</u></string>
+
 </resources>

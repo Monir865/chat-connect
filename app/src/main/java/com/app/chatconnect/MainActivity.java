@@ -1,8 +1,6 @@
 package com.app.chatconnect;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.app.chatconnect.activities.Registration;
 import com.app.chatconnect.adapters.ViewPagerScreenContainerAdapter;
 import com.app.chatconnect.models.ScreenContainerModel;
+import com.app.chatconnect.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +48,9 @@ public class MainActivity extends AppCompatActivity {
         //
 
         //checkAndUpdateSharedPrefData();
-        SharedPreferences preferences = getSharedPreferences("getStartComplete", MODE_PRIVATE);
-        boolean isEndStartPage = preferences.getBoolean("getStartComplete", false);
-        if(isEndStartPage)
-            startActivity(new Intent(MainActivity.this, Registration.class));
+        //Utils.checkSharedPref(getApplicationContext(),"getStartComplete", MODE_PRIVATE, MainActivity.class, Registration.class);
+        Utils.checkSharedPref(this, "getStartComplete", MODE_PRIVATE, MainActivity.class, Registration.class);
+
 
         List<ScreenContainerModel> screenList = new ArrayList<ScreenContainerModel>();
         screenList.add(new ScreenContainerModel(R.drawable.ic_connection_icon,"Seamless Chat Connection","Connect with friends and colleagues instantly through our reliable chat platform. Start conversations, share moments, and stay connected with ease, no matter where you are."));
@@ -101,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
         MainGetStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAndUpdateSharedPrefData();
+                Utils.updateSharedPrefData(MainActivity.this,"getStartComplete", MODE_PRIVATE, true);
+
                 startActivity(new Intent(MainActivity.this, Registration.class));
             }
         });
@@ -133,12 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void checkAndUpdateSharedPrefData(){
-        SharedPreferences preferences = getSharedPreferences("getStartComplete" , MODE_PRIVATE);
-        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor pref_edit = preferences.edit();
-        pref_edit.putBoolean("getStartComplete", true);
-        pref_edit.apply();
-    }
+
 
 
 }
