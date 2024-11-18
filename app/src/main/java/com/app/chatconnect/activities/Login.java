@@ -65,6 +65,7 @@ public class Login extends AppCompatActivity {
                         public void run() {
                             startActivity(new Intent(Login.this, Home.class));
                             dialog.dismiss();
+                            finish();
                         }
                     }, 1000);
 
@@ -78,6 +79,7 @@ public class Login extends AppCompatActivity {
 
         logRegistrationTxtBtn.setOnClickListener(v->{
             startActivity(new Intent(Login.this, Registration.class));
+            finish();
         });
         showPassWordCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override

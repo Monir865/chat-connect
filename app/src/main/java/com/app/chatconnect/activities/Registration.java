@@ -91,7 +91,11 @@ public class Registration extends AppCompatActivity {
 
     }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        if(this instanceof Registration)
+            finishAffinity();
+        else
+            super.onBackPressed();
+    }
 }

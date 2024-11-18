@@ -36,9 +36,9 @@ public class Utils {
             Intent intent = new Intent(context, TO_CLASS);
             context.startActivity(intent);
 
-            if(context instanceof android.app.Activity){
+            //if(context instanceof android.app.Activity){
                 ((Activity) context).finish();
-            }
+            //}
         }
     }
 
